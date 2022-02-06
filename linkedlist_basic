@@ -1,0 +1,11 @@
+Node *temp1 = head;
+      int x = cnt-n;
+      while(x--){
+          temp1=temp1->next;
+      }
+      int sum=0;
+      while(temp1!=NULL){
+          sum+=temp1->data;
+          temp1=temp1->next;
+      }
+      return sum;
