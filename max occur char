@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+    public:
+    //Function to find the maximum occurring character in a string.
+    char getMaxOccuringChar(string str)
+    {
+        int arr[26]={0};
+        
+        for(int i=0;i<str.size();i++)
+        {
+            arr[str[i]-'a']++;
+        }
+        
+        int greater=0;
+        char result;
+        int max=-1;
+        
+        for(int i=0;i<26;i++)
+        {
+            if(arr[i]>greater)
+            {
+                greater=arr[i];
+                max=i;
+            }
+        }
+        
+        result=max+'a';
+        return result;
+    }
+};
+
+
+int main()
+{
+   
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        string str;
+        cin >> str;
+    	Solution obj;
+        cout<< obj.getMaxOccuringChar(str)<<endl;
+    }
+}
