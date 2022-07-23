@@ -1,0 +1,56 @@
+/*The structure of Node
+
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
+*/
+
+class Solution{
+  public:
+    // returns the inorder successor of the Node x in BST (rooted at 'root')
+    Node *Findmin(Node *root)
+    {
+        if(root==NULL)return NULL;
+        while(root->left!=NULL)
+        {
+            root=root->left;
+        }
+        return root;
+    }
+    
+    Node * inOrderSuccessor(Node *root, Node *x)
+    {
+        if(root==NULL)return NULL;
+        
+        //case 1;
+        if(x->right!=NULL)
+        {
+            return Findmin(x->right);
+        }
+        
+        //case 2;
+        else{
+            Node *successor=NULL;
+            Node *ancestor=root;
+            
+            while(ancestor !=x){
+                if(x->data<ancestor->data){
+                    successor=ancestor;
+                    ancestor=ancestor->left;
+                }
+                else
+                    ancestor=ancestor->right;
+            }
+            return successor;
+        }
+        
+        
+    }
+};
