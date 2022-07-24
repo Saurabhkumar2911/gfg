@@ -1,0 +1,36 @@
+
+
+// Function to delete a node from BST.
+Node *inorderSucc(Node *root){
+    Node *curr=root;
+    while(curr && curr->left!=NULL)
+    {
+        curr=curr->left;
+    }
+    return curr;
+}
+
+Node *deleteNode(Node *root, int X) {
+    if(root==NULL)return root;
+    
+    if(root->data>X)
+    root->left=deleteNode(root->left,X);
+    
+    else if(root->data<X)
+    root->right=deleteNode(root->right,X);
+    
+    else if(root->data==X)
+    {
+        if(root->left==NULL && root->right==NULL)
+        {
+            delete root;
+            return NULL;
+        }
+        
+        Node *temp=inorderSucc(root->right);
+        root->data=temp->data;
+        root->right=deleteNode(root->right,temp->data);
+    }
+    return root;
+    
+}
