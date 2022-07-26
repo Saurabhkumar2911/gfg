@@ -1,0 +1,30 @@
+class Solution{
+    public:
+    int search(int A[], int l, int h, int key){
+        // l: The starting index
+        // h: The ending index, you have to search the key in this range
+        
+        //complete the function here
+        
+       if(l<=h){
+           int mid=(l+h)/2;
+           if(A[mid]==key) return mid;
+           
+           if(A[mid]>=A[l]){
+               if(key<=A[mid] && key>=A[l])
+                   return search(A,l,mid-1,key);
+               else
+                   return search(A,mid+1,h,key);
+           }
+           else{
+               if(key>=A[mid] && key<=A[h])
+                   return search(A,mid+1,h,key);
+               else
+                   return search(A,l,mid-1,key);
+           }
+       }
+       
+       return -1;
+   }
+
+};
