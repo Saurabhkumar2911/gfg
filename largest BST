@@ -1,0 +1,60 @@
+/* Tree node structure  used in the program
+
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};*/
+
+class Solution{
+    public:
+    /*You are required to complete this method */
+    // Return the size of the largest sub-tree which is also a BST
+    
+    struct info{
+        int size;
+        int max;
+        int min;
+        int ans;
+        bool isBST;
+    };
+    
+    info solve(Node *root)
+    {
+    	 if(root==NULL)return {0,INT_MIN, INT_MAX, 0, true};
+    	 if(root->left==NULL && root->right==NULL) return {1,root->data,root->data,1,true};
+    	 
+    	 info leftInfo= solve(root->left);
+    	 info rightInfo= solve(root->right);
+    	 
+    	 info curr;
+    	 curr.size=(1 + leftInfo.size + rightInfo.size);
+    	 
+    	 if(leftInfo.isBST && rightInfo.isBST && leftInfo.max<root->data && rightInfo.min>root->data)
+    	 {
+    	     curr.min=min(leftInfo.min, min(rightInfo.min,root->data));
+    	     curr.max=max(rightInfo.max, max(leftInfo.max,root->data));
+    	     
+    	     curr.ans=curr.size;
+    	     curr.isBST=true;
+    	     
+    	     return curr;
+    	 }
+    	 
+    	 curr.ans=max(leftInfo.ans,rightInfo.ans);
+    	     curr.isBST=false;
+    	     
+    	     return curr;
+    }
+    
+    int largestBst(Node *root)
+    {
+    	info temp=solve(root);
+    	return temp.ans;
+    }
+};
