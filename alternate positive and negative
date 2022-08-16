@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// } Driver Code Ends
+//User function template for C++
+class Solution{
+public:
+
+	void rearrange(int arr[], int size) {
+	     
+	    vector<int> pv,nv,ans;
+	    
+	    for(int i=0;i<size;i++)
+	    {
+	        if(arr[i]>= 0)pv.push_back(arr[i]);
+	        else nv.push_back(arr[i]);
+	    }
+	  
+	  int i=0,p=0,n=0;
+	  bool flag=true;
+	  
+	  while(i<size)
+	  {
+	    if(flag && p<pv.size())
+	    {
+	        arr[i]=pv[p];
+	        i++;
+	        p++;
+	    }
+	    else if(!flag && n<nv.size())
+	    {
+	        arr[i]=nv[n];
+	        i++;
+	        n++;
+	    }
+	    
+	    flag=!flag;
+	  }
+	  
+	  
+	}
+};
